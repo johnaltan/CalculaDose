@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo de doses pediátricas</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      margin-top: 20px;
+    }
+    
+    #container {
+      margin-top: 20px;
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cálculo de doses pediátricas</h1>
+  
+  <label for="weight">Peso (kg):</label>
+  <input type="number" id="weight" name="weight" min="0" step="0.1" required>
+  
+  <div id="container">
+    <label for="medication">Medicamento:</label>
+    <select id="medication" name="medication">
+      <!-- As opções serão preenchidas com JavaScript -->
+    </select>
+  </div>
+  
+  <div id="result"></div>
+  
+  <script type="module">
+    // Aqui você deve fazer a leitura do arquivo JSON e preencher as opções do select #medication
+    // Por simplicidade, vou criar algumas opções de exemplo manualmente:
+    
+    var medications = [
+        {
+        "nome": "Dipirona",
+        "concentracao_por_mL": 500,
+        "via_administracao": "Oral",
+        "dose_por_kg_min": 15,
+        "dose_por_kg_max": 25,
+        "gotas_por_mL": 20,
+        "posologia": "6/6h"
+        },
+        {
+            "nome": "Dipirona2",
+            "concentracao_por_mL": 500,
+            "via_administracao": "Oral",
+            "dose_por_kg_min": 15,
+            "dose_por_kg_max": 25,
+            "gotas_por_mL": 20,
+            "posologia": "6/6h"
+        },
+        {
+        "nome": "Medicamento B",
+        "concentracao": "5mg/mL",
+        "via_administracao": "Intravenosa",
+        "dose_por_kg": 0.1,
+        "gotas_por_mL": 10
+        },
+        {
+        "nome": "Medicamento C",
+        "concentracao": "2mg/mL",
+        "via_administracao": "Intramuscular",
+        "dose_por_kg": 0.05,
+        "gotas_por_mL": 5
+        }
+    ]
+    
+    var medicationSelect = document.getElementById("medication");
+    for (var i = 0; i < medications.length; i++) {
+      var option = document.createElement("option");
+      option.text = medications[i].nome;
+      option.value = i;
+      medicationSelect.add(option);
+    }
+    
+    // Função para calcular e exibir o resultado
+    function calculateDose() {
+      var weight = document.getElementById("weight").value;
+      var selectedMedicationIndex = document.getElementById("medication").value;
+      var selectedMedication = medications[selectedMedicationIndex];
+      
+      var doseMlMin = (weight * selectedMedication.dose_por_kg_min)/selectedMedication.concentracao_por_mL;
+      
+      var doseMlMax = (weight * selectedMedication.dose_por_kg_max)/selectedMedication.concentracao_por_mL;
+      
+      var doseGotasMin = doseMlMin * selectedMedication.gotas_por_mL;
+      var doseGotasMax = doseMlMax * selectedMedication.gotas_por_mL;
+      
+      document.getElementById("result").textContent = "Dose: " + doseGotasMin.toFixed(0) + " a  " + doseGotasMax.toFixed(0) + " gotas de " + selectedMedication.posologia;
+    }
+    
+    // Chamar a função calculateDose quando o peso ou o medicamento forem alterados
+    document.getElementById("weight").addEventListener("input", calculateDose);
+    document.getElementById("medication").addEventListener("change", calculateDose);
+  </script>
+</body>
+</html>

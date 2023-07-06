@@ -1,0 +1,34 @@
+[
+    {
+      "nome": "Dipirona",
+      "concentracao_por_mL": 500,
+      "via_administracao": "Oral",
+      "dose_por_kg_min": 15,
+      "dose_por_kg_max": 25,
+      "gotas_por_mL": 20,
+      "posologia": "6/6h"
+    },
+    {
+        "nome": "Dipirona2",
+        "concentracao_por_mL": 500,
+        "via_administracao": "Oral",
+        "dose_por_kg_min": 15,
+        "dose_por_kg_max": 25,
+        "gotas_por_mL": 20,
+        "posologia": "6/6h"
+      },
+    {
+      "nome": "Medicamento B",
+      "concentracao": "5mg/mL",
+      "via_administracao": "Intravenosa",
+      "dose_por_kg": 0.1,
+      "gotas_por_mL": 10
+    },
+    {
+      "nome": "Medicamento C",
+      "concentracao": "2mg/mL",
+      "via_administracao": "Intramuscular",
+      "dose_por_kg": 0.05,
+      "gotas_por_mL": 5
+    }
+  ]
